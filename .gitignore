@@ -1,0 +1,13 @@
+# Raw wireless captures and reconstructed/attack artifacts — never publish these.
+*.pcap
+*.pcapng
+*.cap
+*.mp4
+*.mov
+*.bin
+
+# Exploit tooling — belongs in the private research repo, not here.
+poc_*.py
+ota_flash.py
+device_connect.py
+wordlistGeneration.c
