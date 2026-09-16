@@ -2,13 +2,13 @@
 
 Four coordinated CVEs in the Softish C6 ear camera (also sold as "Jegoat"
 and under other white-label names) and its companion Android app, EarVision
-(`com.atomath.wifi_camera` v1.3.1). Coordinated through CERT/CC as
-**VU#763563**.
+(`com.atomath.wifi_camera` v1.3.1). Coordinated through CISA as
+**CSAF Advisory VA-26-251-01**.
 
 - **Full write-up:** [`earvision.md`](earvision.md)
 - **Formal paper (PDF):** [`Inside-the-Ear-Canal.pdf`](Inside-the-Ear-Canal.pdf)
 - **Web version:** https://mdubbrin.github.io/research/softish-c6-earvision/
-- **CERT/CC advisory:** https://kb.cert.org/vuls/id/763563
+- **CISA advisory:** CSAF Advisory VA-26-251-01
 
 ## Findings
 
@@ -54,7 +54,7 @@ was withheld from it.
 | Date | Event |
 |---|---|
 | May 2026 | Initial discovery |
-| 2026 | Reported to CERT/CC; case opened as VU#763563 |
+| 2026 | Reported to CISA; published as CSAF Advisory VA-26-251-01 |
 | 2 Sep 2026 | CVE-2026-81330, -81640, -82563, -77974 published |
 | 16 Sep 2026 | Research paper published |
 

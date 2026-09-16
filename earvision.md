@@ -1,6 +1,6 @@
 ---
 title: "Inside the Ear Canal: Four CVEs in the Softish C6 Camera and EarVision App"
-description: "A consumer otoscope camera streams unencrypted video over UDP, derives its Wi-Fi password from a public identifier, authenticates nothing, and accepts unsigned firmware. Four CVEs under VU#763563."
+description: "A consumer otoscope camera streams unencrypted video over UDP, derives its Wi-Fi password from a public identifier, authenticates nothing, and accepts unsigned firmware. Four CVEs under CISA CSAF Advisory VA-26-251-01."
 date: 2026-09-16
 author: "Matthew Dubbrin — Vexel Foundation"
 tags:
@@ -17,7 +17,7 @@ draft: false
 
 ## Security Advisories
 
-VINCE: https://kb.cert.org/vuls/id/763563
+CISA: CSAF Advisory VA-26-251-01
 
 CVE IDs: CVE-2026-81330, CVE-2026-82563, CVE-2026-81640, CVE-2026-77974
 
@@ -33,7 +33,7 @@ We bought the hardware, pulled the app apart, and put a wireless interface into
 monitor mode. What we found was not one flaw. It was the complete absence of a
 security model.
 
-Four issues were assigned CVEs under CERT/CC case VU#763563:
+Four issues were assigned CVEs, documented in CISA CSAF Advisory VA-26-251-01:
 
 | CVE            | Issue                                            | CWE      | CVSS 3.1     |
 | -------------- | ------------------------------------------------ | -------- | ------------ |
@@ -60,7 +60,7 @@ unsigned firmware to the hardware.
 - **Attacker position:** Wireless range of the device or the phone
 - **Required interaction:** None for video interception; one tap for the OTA chain
 - **Vendor contact:** No vendor security contact could be identified
-- **Coordination:** CERT/CC, VU#763563
+- **Coordination:** CISA, CSAF Advisory VA-26-251-01
 
 ## Why This Device Is Different
 
@@ -345,15 +345,16 @@ transfer on port 61500.
 
 ## Disclosure
 
-We reported the issues to CERT/CC, which assigned VU#763563 and coordinated
-CVE assignment. The four CVEs were published on 2 September 2026.
+We reported the issues to CISA, which coordinated CVE assignment and
+published CSAF Advisory VA-26-251-01. The four CVEs were published on
+2 September 2026.
 
 We were unable to identify a security contact for the vendor. The product ships
 under multiple brand names from what appears to be a white-label manufacturing
 arrangement, with no published vulnerability disclosure policy, no
 `security.txt`, and no security address on any of the storefronts or
 documentation we could locate. This is the normal condition for this class of
-hardware and it is the reason coordination went through CERT/CC rather than
+hardware and it is the reason coordination went through CISA rather than
 direct contact.
 
 This is worth stating plainly rather than burying: the reason a consumer medical
