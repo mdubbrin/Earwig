@@ -12,12 +12,17 @@ and under other white-label names) and its companion Android app, EarVision
 
 ## Findings
 
-| CVE | Finding | CWE | CVSS (est.) |
+| CVE | Finding | CWE | CVSS 3.1 |
 |---|---|---|---|
-| [CVE-2026-81330](CVE-2026-81330/) | Cleartext live video over UDP | CWE-319 | 7.5 Critical |
-| [CVE-2026-81640](CVE-2026-81640/) | AP password derivable from broadcast BSSID | CWE-330, CWE-798 | 6.5 High |
-| [CVE-2026-82563](CVE-2026-82563/) | Device identity accepted from broadcast values, not cryptography | CWE-290 | 8.8 Critical |
-| [CVE-2026-77974](CVE-2026-77974/) | Unauthenticated, unsigned OTA firmware transfer | CWE-306, CWE-494 | 7.6 Critical |
+| [CVE-2026-81330](CVE-2026-81330/) | Cleartext live video over UDP | CWE-319 | 6.5 Medium |
+| [CVE-2026-81640](CVE-2026-81640/) | AP password derivable from broadcast BSSID | CWE-798 | 8.8 High |
+| [CVE-2026-82563](CVE-2026-82563/) | Device identity accepted from broadcast values, not cryptography | CWE-290 | 7.6 High |
+| [CVE-2026-77974](CVE-2026-77974/) | Unauthenticated, unsigned OTA firmware transfer | CWE-306 | 8.0 High |
+
+Scores and CWEs above are the official values from the published CVE
+records; none of the four reach the Critical band (9.0+) under standard
+CVSS v3.1 thresholds. CVE-2026-81640 carries the highest score of the four
+despite reading as the "quieter" finding in the write-up's narrative.
 
 Individually, each is a common IoT defect. Chained (81640 → 81330 / 82563 →
 77974), they let anyone within radio range of the device passively recover

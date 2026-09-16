@@ -35,12 +35,14 @@ security model.
 
 Four issues were assigned CVEs under CERT/CC case VU#763563:
 
-| CVE            | Issue                                            | CWE              |
-| -------------- | ------------------------------------------------ | ---------------- |
-| CVE-2026-81330 | Live video transmitted in cleartext over UDP     | CWE-319          |
-| CVE-2026-82563 | Device identified by broadcast values, not crypto | CWE-290          |
-| CVE-2026-81640 | AP password derivable from the broadcast BSSID   | CWE-330, CWE-798 |
-| CVE-2026-77974 | Unauthenticated, unsigned OTA firmware transfer   | CWE-306, CWE-494 |
+| CVE            | Issue                                            | CWE      |
+| -------------- | ------------------------------------------------ | -------- |
+| CVE-2026-81330 | Live video transmitted in cleartext over UDP     | CWE-319  |
+| CVE-2026-82563 | Device identified by broadcast values, not crypto | CWE-290  |
+| CVE-2026-81640 | AP password derivable from the broadcast BSSID   | CWE-798  |
+| CVE-2026-77974 | Unauthenticated, unsigned OTA firmware transfer   | CWE-306  |
+
+CWEs above are the official assignments from the published CVE records.
 
 Individually, each is a common IoT mistake. Chained, they let anyone within
 radio range watch the video feed, impersonate the camera to the app, and push
@@ -174,10 +176,10 @@ derivation, and holds the key. No handshake capture, no dictionary, no cracking
 time. From there, CVE-2026-81330 follows immediately: they can associate with the
 camera or decrypt captured traffic and read the video.
 
-CWE-330 covers the use of insufficiently random values. CWE-798 covers hardcoded
-credentials. This sits between the two: the credential is not literally hardcoded
-in firmware, but it is fully determined by a public value, which has the same
-outcome.
+CWE-798 covers hardcoded credentials, and it is the officially assigned
+weakness for this CVE. The credential is not literally hardcoded in firmware,
+but it is fully determined by a public value, which has the same practical
+outcome: a value an attacker never has to guess.
 
 ## CVE-2026-82563: The App Does Not Authenticate the Device
 
@@ -267,11 +269,11 @@ Three separate controls are missing here, and any one of them would have
 contained the issue:
 
 1. **Authentication on the status channel.** Version fields are accepted from an
-   unverified source. This is the CWE-306 component: a security-relevant
-   operation is reachable with no authentication in front of it.
+   unverified source: a security-relevant operation is reachable with no
+   authentication in front of it. This is CWE-306, the officially assigned
+   weakness for this CVE.
 2. **Signature verification on the image.** Nothing binds the firmware to the
-   vendor. This is the CWE-494 component: code is downloaded and used without an
-   integrity check.
+   vendor, so code is downloaded and used with no integrity check.
 3. **Transport security.** The transfer itself is observable and modifiable in
    flight.
 
