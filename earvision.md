@@ -35,14 +35,18 @@ security model.
 
 Four issues were assigned CVEs under CERT/CC case VU#763563:
 
-| CVE            | Issue                                            | CWE      |
-| -------------- | ------------------------------------------------ | -------- |
-| CVE-2026-81330 | Live video transmitted in cleartext over UDP     | CWE-319  |
-| CVE-2026-82563 | Device identified by broadcast values, not crypto | CWE-290  |
-| CVE-2026-81640 | AP password derivable from the broadcast BSSID   | CWE-798  |
-| CVE-2026-77974 | Unauthenticated, unsigned OTA firmware transfer   | CWE-306  |
+| CVE            | Issue                                            | CWE      | CVSS 3.1     |
+| -------------- | ------------------------------------------------ | -------- | ------------ |
+| CVE-2026-81330 | Live video transmitted in cleartext over UDP     | CWE-319  | 6.5 Medium   |
+| CVE-2026-82563 | Device identified by broadcast values, not crypto | CWE-290  | 7.6 High     |
+| CVE-2026-81640 | AP password derivable from the broadcast BSSID   | CWE-798  | 8.8 High     |
+| CVE-2026-77974 | Unauthenticated, unsigned OTA firmware transfer   | CWE-306  | 8.0 High     |
 
-CWEs above are the official assignments from the published CVE records.
+CWEs and CVSS scores above are the official values from the published CVE
+records. None of the four reach the Critical band (9.0+) under standard CVSS
+v3.1 thresholds, and CVE-2026-81640 — the password-derivation issue — is the
+highest-scoring of the four, despite reading as the quieter, enabling step in
+the narrative below.
 
 Individually, each is a common IoT mistake. Chained, they let anyone within
 radio range watch the video feed, impersonate the camera to the app, and push
@@ -209,7 +213,7 @@ is enough for the app to accept it as the camera.
 
 Once the app accepts the rogue endpoint, the attacker controls both directions of
 the conversation. Device status is whatever the attacker says it is. That is the
-pivot into the last and worst issue.
+pivot into the final issue below: unauthenticated, unsigned firmware execution.
 
 ## CVE-2026-77974: Unauthenticated, Unsigned Firmware Update
 
