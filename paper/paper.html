@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Inside the Ear Canal</title>
+<style>
+@page {
+  size: letter;
+  margin: 0.8in 0.65in 0.85in 0.65in;
+  @bottom-center { content: counter(page); font-family: "Liberation Serif", serif; font-size: 9pt; color:#000; }
+}
+
+*{ box-sizing:border-box; }
+body{
+  font-family: "Liberation Serif", "Times New Roman", serif;
+  font-size: 10pt;
+  line-height: 1.28;
+  color: #000;
+  margin: 0;
+}
+p{ margin: 0 0 7pt; text-align: justify; text-indent: 1em; orphans:2; widows:2; }
+p.noindent{ text-indent:0; }
+
+/* ---------- Title block (full width) ---------- */
+.titleblock{ text-align:center; margin-bottom: 12pt; }
+h1.ptitle{ font-size: 19pt; font-weight:bold; margin:0 0 3pt; line-height:1.2; }
+p.psub{ font-size: 12.5pt; font-style:italic; margin:0 0 10pt; }
+p.authors{ font-size: 11pt; margin:0 0 1pt; }
+p.affil{ font-size: 9.5pt; font-style:italic; color:#000; margin:0 0 2pt; }
+p.case{ font-size: 9pt; font-family: monospace; letter-spacing:.03em; color:#000; margin: 4pt 0 0; }
+
+/* ---------- Abstract (full width) ---------- */
+.abstractblock{ margin: 4pt 0 12pt; padding: 0 0.15in; }
+.abstractblock p{ font-size:9.5pt; text-indent:0; margin:0; }
+.abstractblock .lead{ font-weight:bold; font-style:italic; }
+p.keywords{ font-size:9.5pt; font-style:italic; margin: 7pt 0 0; text-indent:0; }
+p.keywords b{ font-style:normal; }
+
+hr.rule{ border:none; border-top:0.6pt solid #000; margin: 0 0 10pt; }
+
+/* ---------- Two-column body ---------- */
+.cols{ column-count:2; column-gap: 0.28in; }
+
+h2.sec{
+  font-size: 10.5pt; font-weight:bold; text-transform:uppercase; letter-spacing:.03em;
+  margin: 11pt 0 5pt; break-after: avoid;
+}
+h3.subsec{ font-size: 10pt; font-weight:bold; font-style:italic; margin: 8pt 0 3pt; break-after: avoid; }
+h3.subsec .label{ font-style:normal; }
+
+/* ---------- Tables (full width, between column blocks) ---------- */
+.tablefig{ margin: 8pt 0 10pt; break-inside: avoid; }
+p.tablecap{ font-size:8.5pt; text-align:center; font-variant:small-caps; text-indent:0; margin:0 0 4pt; }
+p.tablecap b{ font-variant:normal; }
+table.acad{ width:100%; border-collapse:collapse; font-size:8.5pt; }
+table.acad caption{ caption-side: top; }
+table.acad th{
+  border-top:1pt solid #000; border-bottom:0.6pt solid #000; text-align:left;
+  padding: 3pt 5pt; font-weight:bold;
+}
+table.acad td{ border-bottom:0.4pt solid #999; padding:3pt 5pt; vertical-align:top; }
+table.acad tbody tr:last-child td{ border-bottom:1pt solid #000; }
+table.acad code{ font-family:monospace; font-size:8pt; }
+
+figure.acad{ margin: 8pt 0 10pt; text-align:center; break-inside: avoid; }
+figure.acad img{ width:100%; max-width: 6.6in; }
+figcaption.acad{ font-size:8.5pt; text-align:left; margin-top:4pt; }
+figcaption.acad b{ font-style:normal; }
+
+code{ font-family: monospace; font-size: 9pt; }
+
+.footnote-list{ font-size:9pt; }
+
+ul.acad{ margin: 0 0 7pt 0; padding-left: 1.3em; }
+ul.acad li{ font-size:10pt; margin: 3pt 0; text-align: justify; }
+
+/* ---------- References (two column, small) ---------- */
+.refs{ font-size:8.7pt; padding-left:0; list-style:none; counter-reset:refc; }
+.refs li{
+  counter-increment: refc; margin: 0 0 5pt; text-indent: -1.4em; margin-left:1.4em;
+}
+.refs li::before{ content:"[" counter(refc) "]  "; }
+
+.ackn{ font-size:9.5pt; text-indent:0; }
+</style>
+</head>
+<body>
+
+<div class="titleblock">
+  <h1 class="ptitle">Inside the Ear Canal</h1>
+  <p class="psub">A Chained Vulnerability Disclosure for a Consumer Ear-Canal Camera</p>
+  <p class="authors">Matthew Dubbrin</p>
+  <p class="affil">Vexel Foundation</p>
+  <p class="case">CERT/CC VU#763563 &nbsp;&#183;&nbsp; CVE-2026-81330, CVE-2026-81640, CVE-2026-82563, CVE-2026-77974</p>
+</div>
+
+<div class="abstractblock">
+  <p><span class="lead">Abstract&mdash;</span>The Softish C6 is a consumer ear-canal camera, sold under multiple white-label brand names and controlled by an Android application, EarVision, over a device-hosted Wi-Fi access point. We present four vulnerabilities discovered through static analysis of the companion application and passive wireless capture of the device's control and video protocol: cleartext transmission of live video, an access-point credential algorithmically derivable from a value broadcast in every beacon frame, acceptance of an unauthenticated rogue access point as the genuine device, and an unauthenticated, unsigned over-the-air firmware update path. Individually, each is a familiar class of IoT defect. Composed, they form a single passive-to-active chain: an attacker who only reads beacon frames can recover the Wi-Fi credential, decrypt the video feed, impersonate the device to the application, and, with one user tap, deliver an arbitrary firmware image with no signature check. We argue this chain is materially worse than the median IoT camera disclosure because the data in transit is medical-adjacent, frequently depicts a minor, and because no accountable vendor security contact could be established for the product. All four issues were coordinated through CERT/CC under VU#763563. Consistent with our exploit-code policy (Section IX), we withhold the credential derivation routine, rogue-access-point implementation, and video reconstruction tooling.</p>
+  <p class="keywords"><b>Index Terms&mdash;</b>IoT security, medical device privacy, cleartext transmission, derivable credentials, authentication bypass, unsigned firmware, coordinated disclosure</p>
+</div>
+
+<hr class="rule">
+
+<div class="cols">
+
+<h2 class="sec">I. Introduction</h2>
+<p>Most consumer IoT camera disclosures end with the observation that an attacker can watch a living room. This one ends with an attacker watching inside a body cavity, on hardware marketed for use on children, secured by a password that is broadcast in the clear ten times a second.</p>
+<p>The Softish C6 is a handheld otoscope: a camera at the tip of a probe, a Wi-Fi radio in the handle, and no cloud service in between. A companion Android application, EarVision (package <code>com.atomath.wifi_camera</code>), streams the feed live to the user's phone. The same reference hardware ships under several storefront names, a typical arrangement for white-label IoT, which is itself a contributing factor in the disclosure difficulty documented in Section VII.</p>
+<p>We treat this device as a case study rather than a set of isolated findings because the four vulnerabilities identified do not fail independently. Each removes one control from the same trust boundary&mdash;transport, credential, identity, and integrity, in that order&mdash;and each failure makes the next easier to reach. Section V formalizes this as a single attack graph. The practical result is that an attacker's cost to go from being in radio range to having pushed unsigned firmware to the device is a passive capture, an inexpensive microcontroller, and one tap on a prompt that the legitimate update flow also produces.</p>
+<p>What distinguishes this device from a generic security-camera advisory is the sensitivity of the data in transit. The footage is ear-canal anatomy, eardrum condition, and any hearing-assistive hardware the subject wears; the product is marketed to parents as a way to check a child's ear at home rather than book a clinician visit. We return to this point in Section X, but it motivates the severity framing used throughout this paper: confidentiality of the video channel is treated as the anchor harm, not an afterthought to the firmware-integrity finding.</p>
+
+<h2 class="sec">II. System Architecture and Threat Model</h2>
+<p>The C6 does not join the user's home network. It is its own access point: the phone disconnects from whatever network it was previously on, associates to the camera's SSID (of the form <code>softish-XXXXXX</code>, where the suffix is derived from the device's BSSID), and the app speaks to the device directly over two UDP ports. There is no broker, no cloud relay, and, outside of the firmware images bundled in the APK itself, no external infrastructure involved in normal operation.</p>
+
+</div><!-- /cols -->
+
+<div class="tablefig">
+  <figure class="acad">
+    <img src="fig1-protocol.svg" alt="Protocol overview diagram">
+    <figcaption class="acad"><b>Fig. 1.</b> Protocol overview. Port 61500 is bidirectional&mdash;control opcodes travel phone to device, JSON status and WEBP-encoded frames travel device to phone on the same port&mdash;while port 61501 carries a separate JPEG stream device to phone. No channel is encrypted, authenticated, or integrity-checked.</figcaption>
+  </figure>
+</div>
+
+<div class="cols">
+
+<p class="noindent">The application manifest declares this posture explicitly: <code>android:usesCleartextTraffic="true"</code>. There is no TLS configuration to audit for weakness, because there is no TLS. The threat model evaluated here is accordingly the simplest possible one for a wireless device: an attacker with a commodity Wi-Fi adapter in monitor mode, within radio range of either the camera or the phone, with no prior credential and no physical access to either device.</p>
+
+</div><!-- /cols -->
+
+<div class="tablefig">
+  <p class="tablecap"><b>Table I</b><br>Confirmed Control Opcodes, UDP/61500 (Phone &rarr; Device)</p>
+  <table class="acad">
+    <thead><tr><th>Opcode</th><th>Length</th><th>Function</th></tr></thead>
+    <tbody>
+      <tr><td><code>10 01</code></td><td>2 B</td><td>Metadata poll; device responds with JSON status</td></tr>
+      <tr><td><code>10 02</code></td><td>2 B</td><td>Stream start request</td></tr>
+      <tr><td><code>10 03</code></td><td>4 B</td><td>Periodic metadata poll</td></tr>
+      <tr><td><code>10 04</code></td><td>786 B</td><td>OTA initiation; 16-byte header plus raw firmware image (Section IV-D)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="cols">
+
+<h2 class="sec">III. Methodology</h2>
+<p>All testing was performed against researcher-owned hardware in a researcher-controlled environment. No third-party device, network, or user was involved at any point.</p>
+<ul class="acad">
+<li><i>Static analysis.</i> The EarVision APK was decompiled and its manifest, bundled assets, and Java/Flutter platform bridge reviewed. This is where the cleartext-traffic flag, the three bundled firmware images, the MNN inference plugin, and a bundled TFLite model disguised with a non-standard extension were located.</li>
+<li><i>Wireless capture.</i> A wireless interface was placed in monitor mode and traffic between phone and camera captured across normal app usage: pairing, live viewing, still capture, and update checks.</li>
+<li><i>Protocol analysis.</i> The two UDP channels were separated, the control opcodes on port 61500 enumerated (Table I), and the JSON status schema mapped field by field.</li>
+<li><i>Frame reconstruction.</i> JPEG and WEBP frames were rebuilt from captured UDP payloads to confirm the video is fully recoverable from a passive capture alone.</li>
+<li><i>Spoofing proof of concept.</i> A rogue access point replicating the device's observed BLE and Wi-Fi identity was used to confirm the app accepts it as genuine, and that attacker-supplied version fields in the status JSON reliably produce the OTA prompt and subsequent firmware transfer.</li>
+</ul>
+
+<h2 class="sec">IV. Findings</h2>
+<p>Four CVEs were assigned under CERT/CC case VU#763563 [1]. They are presented in the order used to brief CERT/CC: the passively observable privacy failure first, then the two findings that compose into a full man-in-the-middle position, then the finding that turns that position into arbitrary code execution.</p>
+
+</div><!-- /cols -->
+
+<div class="tablefig">
+  <p class="tablecap"><b>Table II</b><br>Summary of Assigned CVEs</p>
+  <table class="acad">
+    <thead><tr><th>CVE</th><th>Finding</th><th>CWE</th><th>CVSS 3.1 (est.)</th></tr></thead>
+    <tbody>
+      <tr><td>2026-81330</td><td>Cleartext live video over UDP</td><td>319</td><td>7.5 (Critical)</td></tr>
+      <tr><td>2026-81640</td><td>AP password derivable from broadcast BSSID</td><td>330, 798</td><td>6.5 (High)</td></tr>
+      <tr><td>2026-82563</td><td>Device identity accepted from broadcast values</td><td>290</td><td>8.8 (Critical)</td></tr>
+      <tr><td>2026-77974</td><td>Unauthenticated, unsigned OTA firmware transfer</td><td>306, 494</td><td>7.6 (Critical)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="cols">
+
+<h3 class="subsec"><span class="label">A.</span> Cleartext Video Over UDP (CVE-2026-81330)</h3>
+<p>Video leaves the device as ordinary JPEG frames on UDP/61501 (an 8-byte transport header followed by SOI/EOI-delimited JPEG data) and as WEBP frames interleaved with JSON control traffic on UDP/61500. Neither channel carries transport or application-layer encryption. Possession of the AP password, which per Section IV-B requires no cracking, is the only thing separating an observer from the video.</p>
+<p>Frame reconstruction quality in testing tracked capture quality directly: packet loss surfaced as dropped frames rather than failure. The attack degrades gracefully, the wrong property for a confidentiality control to have. Recovery is entirely passive; neither the camera nor the app can detect it, and the user has no indication it is occurring.</p>
+
+<h3 class="subsec"><span class="label">B.</span> Wi-Fi Password Derivable From a Public Value (CVE-2026-81640)</h3>
+<p>The C6's access-point password is unique per device rather than a single value shared across the product line, an implementation choice that on its face looks correct. It is undermined by how that per-device value is produced: it is algorithmically derivable from the device's BSSID, which every C6 broadcasts in the clear, in every beacon frame, several times a second, to anyone listening. A value designed to be public cannot also function as the seed for a secret.</p>
+<p>This sits between two weakness categories rather than squarely in one: the credential is not literally hardcoded in firmware (CWE-798), but it is fully and deterministically derived from a broadcast value, producing the same practical outcome by way of insufficient entropy in the derivation (CWE-330). An attacker in range reads the BSSID off the air and computes the key with no handshake capture, no dictionary, and no cracking time required. Consistent with Section IX, the derivation function itself is withheld.</p>
+
+<h3 class="subsec"><span class="label">C.</span> Device Identity Accepted Without Cryptographic Proof (CVE-2026-82563)</h3>
+<p>EarVision decides whether an endpoint is a genuine C6 using only broadcast identifiers, the Wi-Fi SSID and a BLE advertisement identity, rather than any cryptographic proof of possession. There is no device certificate, challenge-response, shared secret proved over the channel, or signature on device responses. An inexpensive microcontroller that replicates the expected BLE advertisement while hosting a matching SSID is accepted by the app as the real device, including auto-join, because the phone already holds the AP credential from a prior legitimate connection and Section IV-B makes that credential trivial to reproduce independently as well.</p>
+<p>Once accepted, the rogue endpoint controls every field of every JSON status response and every byte of every UDP/61500 reply, a full man-in-the-middle position requiring no further work. This is the pivot into Section IV-D.</p>
+
+<h3 class="subsec"><span class="label">D.</span> Unauthenticated, Unsigned Firmware Update (CVE-2026-77974)</h3>
+<p>The C6 inverts the usual IoT firmware model: images are not fetched by the device from a vendor server, they are bundled inside the Android APK and pushed to the camera by the phone. Three images ship in the app, one per chipset variant (Table III).</p>
+
+</div><!-- /cols -->
+
+<div class="tablefig">
+  <p class="tablecap"><b>Table III</b><br>Bundled Firmware Images (Extracted From EarVision v1.3.1)</p>
+  <table class="acad">
+    <thead><tr><th>File</th><th>Size</th><th>Chipset</th></tr></thead>
+    <tbody>
+      <tr><td><code>bk7252n_251117.bin</code></td><td>616 KB</td><td>Beken BK7252N</td></tr>
+      <tr><td><code>txw806_111.bin</code></td><td>368 KB</td><td>TXW806</td></tr>
+      <tr><td><code>txw810_125.bin</code></td><td>321 KB</td><td>TXW810</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="cols">
+
+<p class="noindent">The update decision is driven entirely by two device-reported fields in the status JSON: if <code>ota_device_version</code> is reported greater than <code>device_version</code>, EarVision presents an update prompt. Neither field is authenticated, and both arrive over an unencrypted channel from an endpoint the app never cryptographically verified (Section IV-C). When the user accepts, the app transmits the bundled image over UDP/61500 as opcode <code>10 04</code> (Table IV).</p>
+
+</div><!-- /cols -->
+
+<div class="tablefig">
+  <p class="tablecap"><b>Table IV</b><br>Confirmed 10&#8201;04 OTA Packet Layout</p>
+  <table class="acad">
+    <thead><tr><th>Offset</th><th>Length</th><th>Field</th></tr></thead>
+    <tbody>
+      <tr><td>0x00</td><td>2 B</td><td>OTA opcode (<code>10 04</code>)</td></tr>
+      <tr><td>0x02</td><td>4 B</td><td>Current device version, little-endian</td></tr>
+      <tr><td>0x06</td><td>4 B</td><td>Firmware size in bytes</td></tr>
+      <tr><td>0x0A</td><td>2 B</td><td>Padding</td></tr>
+      <tr><td>0x0C</td><td>4 B</td><td>Partition / chip identifier</td></tr>
+      <tr><td>0x10</td><td>770 B</td><td>Raw firmware image, byte 0 onward</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="cols">
+
+<p class="noindent">We confirmed the transmitted payload is byte-for-byte identical to the bundled asset, not merely similar, by comparing the packet body against the extracted firmware file directly at every offset. No authentication guards the status channel that triggers the prompt (CWE-306); no signature binds the image to the vendor (CWE-494); and the firmware header itself confirms integrity checking is disabled at the source, with both its CRC-32 and CRC-16 fields zeroed. The device acknowledged the transfer in its status response; confirming persistence across a power cycle would additionally require a physical flash dump, which was out of scope for this disclosure. The user-facing accept prompt is the only remaining gate, and it is visually identical to the prompt a legitimate update produces&mdash;the user cannot distinguish them because the app cannot.</p>
+
+<h2 class="sec">V. The Composite Attack Chain</h2>
+<p>Individually, each finding above is a common IoT defect with numerous public precedents (Section VI). Composed, they form one continuous escalation from a completely passive starting point to arbitrary code execution on the device, requiring exactly one moment of victim interaction at the final step.</p>
+
+</div><!-- /cols -->
+
+<div class="tablefig">
+  <figure class="acad">
+    <img src="fig2-chain.svg" alt="Attack chain diagram">
+    <figcaption class="acad"><b>Fig. 2.</b> The four findings as a single attack graph. The left branch (video interception) needs no user interaction at any point; the right branch (identity spoofing) converges on firmware push, which needs exactly one tap on a prompt visually indistinguishable from a legitimate update.</figcaption>
+  </figure>
+</div>
+
+<div class="cols">
+
+<p class="noindent">Two properties of this chain are worth stating plainly. First, the most severe outcome, arbitrary firmware execution, requires the least technical sophistication of any step, because Sections IV-B and IV-C do all the work of positioning the attacker; the final step is a JSON field and a UDP send. Second, the video-interception branch (Section IV-A) needs no chain at all: it is independently exploitable by anyone who captures the AP handshake or derives the password, with zero interaction with the app or its user.</p>
+
+<h2 class="sec">VI. Related Work</h2>
+<p>None of the four failure classes here are novel. Each has a well-known, independently disclosed precedent, several in categories more consequential than a novelty camera, which is precisely the point: this is not a research problem, it is a pattern that recurs because nothing in the supply chain is accountable for fixing it (Section X).</p>
+
+</div><!-- /cols -->
+
+<div class="tablefig">
+  <p class="tablecap"><b>Table V</b><br>Comparable Disclosed Incidents by Failure Class</p>
+  <table class="acad">
+    <thead><tr><th>Incident</th><th>Failure class</th><th>Parallel</th></tr></thead>
+    <tbody>
+      <tr><td>Mirai botnet, 2016 [2]</td><td>Hardcoded/derivable factory credentials on cheap DVRs and IP cameras</td><td>IV-B</td></tr>
+      <tr><td>Arlo cameras [3]</td><td>Predictable post-setup Wi-Fi credential</td><td>IV-B</td></tr>
+      <tr><td>TP-Link Archer NX, CVE-2025-15517 [4]</td><td>Missing auth check permitting unauthorized firmware upload</td><td>IV-D</td></tr>
+      <tr><td>Wyze Cam, CVE-2019-9564 [5]</td><td>Auth-bypass camera takeover via spoofable device identity</td><td>IV-C</td></tr>
+      <tr><td>Hospira infusion pumps, CISA ICSA-15-125-01 [6]</td><td>Unauthenticated, unsigned firmware on a medical device</td><td>IV-D</td></tr>
+      <tr><td>St. Jude/Abbott cardiac devices, FDA recall 2017 [7]</td><td>Weak/spoofable RF authentication on an implanted device</td><td>IV-C</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="cols">
+
+<p class="noindent">The Hospira and St. Jude/Abbott cases are the closest analogs in consequence class rather than device class: both are medical devices where a missing authentication or integrity control on a reachable update path became a patient-safety issue rather than a privacy one. The C6 is not an infusion pump or a pacemaker, but it is marketed into the same device-touches-a-body, consumer-cost-target category, with none of the design scrutiny those categories eventually received after regulatory intervention.</p>
+
+<h2 class="sec">VII. Disclosure and Vendor Response</h2>
+<p>Initial discovery took place in May 2026 during static analysis of the EarVision APK. The findings were reported to CERT/CC, which opened case VU#763563 and coordinated CVE assignment; CVE-2026-81330, -81640, -82563, and -77974 were published on 2 September 2026.</p>
+<p>We attempted to identify a vendor security contact before proceeding through CERT/CC. The manufacturer of record, Shenzhen Jiding Electronics Co., Ltd., could be identified from the app's bundled privacy policy, but that document lists only a generic, personal-provider email address for privacy-policy questions, not a security contact, not tied to a published disclosure process, and not confidence-inspiring as a channel for a report of this severity. No <code>security.txt</code>, dedicated vulnerability-disclosure page, or security address appears on any storefront or documentation associated with the product or its white-label variants. This is the ordinary condition for this class of hardware, and it is the reason coordination proceeded through CERT/CC rather than direct vendor contact.</p>
+
+<h2 class="sec">VIII. Recommendations</h2>
+<h3 class="subsec"><span class="label">A.</span> For Owners of This Device</h3>
+<p>There is no patch to apply. Treat any footage the device captures as though it were broadcast publicly, because in effect it is; power the device on only for the duration of an actual use, since the access point is live for as long as the device is on; do not use it anywhere a stranger in range watching the feed would be unacceptable; decline firmware update prompts absent specific reason to trust them, since there is no way to verify one; and for anything that will inform a medical decision, particularly for a child, use a clinician instead of this device.</p>
+<h3 class="subsec"><span class="label">B.</span> For Vendors Building This Class of Device</h3>
+<p>Every issue in this paper has a decades-old, well-understood remedy, none requiring novel research: encrypt the media channel (DTLS or SRTP over the existing UDP transport); authenticate the device cryptographically via a per-device key or certificate provisioned at manufacture, since an SSID is an identifier and not an authenticator; generate access-point credentials from real entropy rather than a derivation function; sign firmware and verify the signature on-device against a key burned in at manufacture, the single control that would have neutralized Section IV-D regardless of every other finding; treat device-reported state as untrusted input to security decisions; and publish a monitored security contact and a <code>security.txt</code> file. These recommendations track the baseline technical controls in NIST IR 8259A [8] and the criteria behind the U.S. Cyber Trust Mark program defined in NIST IR 8425 [9], neither of which this product meets on any axis tested. CISA's IoT acquisition guidance [10] is a useful procurement-stage checklist for buyers of this device class more broadly.</p>
+
+<h2 class="sec">IX. Exploit-Code and Ethics Statement</h2>
+<p>We are not publishing the BSSID-to-password derivation routine, the rogue access point implementation, or tooling to reconstruct video from a capture file. The affected behavior is described in this paper in enough technical detail for defenders, researchers, and anyone in the supply chain to understand and act on it, without shipping a working attack toolkit against an unpatchable device that has an unknown but non-trivial number of units already in homes. There is no automatic update path and no vendor security contact through which a fix could be distributed even if one existed; publishing working tooling in that position would harm current owners without meaningfully advancing anyone's understanding beyond what Section IV already provides.</p>
+
+<h2 class="sec">X. Discussion: A Broader Pattern</h2>
+<p>Cheap white-label IoT hardware is a large and growing share of the devices in people's homes, built on reference designs copied across unrelated product lines with the security posture intact, meaning absent. The chipsets in this device appear across a wide range of consumer electronics; the design failures documented here are not specific to ear cameras, and Table V shows the same four failure classes recurring from inexpensive DVRs up through FDA-recalled implanted medical devices.</p>
+<p>What makes this case worth publishing is the gap between the sensitivity of the data and the effort spent protecting it. The product ships an on-device neural network for image processing; someone spent real engineering time on the imaging pipeline. The video that pipeline produces goes out over the air in the clear, protected by a password printed in every beacon frame. That is not a resource constraint; it is a priorities problem, and a predictable outcome when no party in a supply chain, whether original equipment manufacturer, brand, reseller, or app developer, is accountable for security, and no regulation currently forces the question for a device in this category.</p>
+
+<h2 class="sec">XI. Conclusion</h2>
+<p>Four independently unremarkable IoT defects, chained, let anyone within radio range of a Softish C6 watch its video feed, impersonate it to its own companion app, and push it unsigned firmware, with a total interaction cost, at the worst step, of one tap. The device's threat model, to the extent one exists, rests entirely on the assumption that nobody nearby is listening to public radio broadcasts. That assumption fails for an inexpensive Wi-Fi adapter, and it fails for a device that is, by design, pointed inside a human body.</p>
+
+<p class="noindent ackn"><b>Acknowledgments.</b> We thank CERT/CC for coordination under VU#763563 in the continued absence of a responsive vendor security contact.</p>
+
+<h2 class="sec">References</h2>
+<ol class="refs">
+<li>CERT/CC, "VU#763563," kb.cert.org/vuls/id/763563.</li>
+<li>B. Krebs, "Source Code for IoT Botnet 'Mirai' Released," Krebs on Security, 2016.</li>
+<li>Arlo, "Arlo Wi-Fi Default Password Security Vulnerability," support advisory.</li>
+<li>"Patch Now: TP-Link Archer NX Routers Vulnerable to Firmware Takeover," Security Affairs, 2025. CVE-2025-15517.</li>
+<li>"Wyze Cam Flaw Lets Hackers Remotely Access Your Saved Videos," BleepingComputer. CVE-2019-9564.</li>
+<li>CISA, "ICSA-15-125-01B: Hospira Infusion Pump Vulnerabilities."</li>
+<li>"St. Jude Medical Recalls 465,000 Pacemakers Over Security Vulnerabilities," SecurityWeek, 2017.</li>
+<li>NIST, "IR 8259A: IoT Device Cybersecurity Capability Core Baseline."</li>
+<li>NIST, "IR 8425: Technical Baseline for the FCC Cyber Trust Mark."</li>
+<li>CISA, "IoT Acquisition Guidance for Organizations."</li>
+</ol>
+
+</div><!-- /cols -->
+
+</body>
+</html>
