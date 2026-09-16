@@ -6,7 +6,7 @@ and under other white-label names) and its companion Android app, EarVision
 **VU#763563**.
 
 - **Full write-up:** [`earvision.md`](earvision.md)
-- **Formal paper (PDF):** [`paper/Inside-the-Ear-Canal.pdf`](paper/Inside-the-Ear-Canal.pdf)
+- **Formal paper (PDF):** [`Inside-the-Ear-Canal.pdf`](Inside-the-Ear-Canal.pdf)
 - **Web version:** https://mdubbrin.github.io/research/softish-c6-earvision/
 - **CERT/CC advisory:** https://kb.cert.org/vuls/id/763563
 
