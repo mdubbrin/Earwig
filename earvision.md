@@ -1,6 +1,6 @@
 ---
 title: "Inside the Ear Canal: Four CVEs in the Softish C6 Camera and EarVision App"
-description: "A consumer otoscope camera streams unencrypted video over UDP, derives its Wi-Fi password from a public identifier, authenticates nothing, and accepts unsigned firmware. Four CVEs under CISA CSAF Advisory VA-26-251-01."
+description: "A consumer otoscope camera streams unencrypted video over UDP, derives its Wi-Fi password from a public identifier, authenticates nothing, and accepts unsigned firmware. Four CVEs coordinated through CISA."
 date: 2026-09-16
 author: "Matthew Dubbrin — Vexel Foundation"
 tags:
@@ -17,7 +17,12 @@ draft: false
 
 ## Security Advisories
 
-CISA: CSAF Advisory VA-26-251-01
+CISA: advisory pending publication
+
+> **Note:** CISA has not yet published its CSAF advisory for this
+> coordination as of this writing. Once it is live, its advisory ID will
+> be added here and everywhere else in this repository that currently
+> reads "advisory pending publication."
 
 CVE IDs: CVE-2026-81330, CVE-2026-82563, CVE-2026-81640, CVE-2026-77974
 
@@ -33,7 +38,7 @@ We bought the hardware, pulled the app apart, and put a wireless interface into
 monitor mode. What we found was not one flaw. It was the complete absence of a
 security model.
 
-Four issues were assigned CVEs, documented in CISA CSAF Advisory VA-26-251-01:
+Four issues were assigned CVEs, coordinated through CISA:
 
 | CVE            | Issue                                            | CWE      | CVSS 3.1     |
 | -------------- | ------------------------------------------------ | -------- | ------------ |
@@ -60,7 +65,7 @@ unsigned firmware to the hardware.
 - **Attacker position:** Wireless range of the device or the phone
 - **Required interaction:** None for video interception; one tap for the OTA chain
 - **Vendor contact:** No vendor security contact could be identified
-- **Coordination:** CISA, CSAF Advisory VA-26-251-01
+- **Coordination:** CISA (advisory pending publication)
 
 ## Why This Device Is Different
 
@@ -345,9 +350,10 @@ transfer on port 61500.
 
 ## Disclosure
 
-We reported the issues to CISA, which coordinated CVE assignment and
-published CSAF Advisory VA-26-251-01. The four CVEs were published on
-2 September 2026.
+We reported the issues to CISA, which coordinated CVE assignment. The four
+CVEs were published on 2 September 2026. CISA's advisory was still pending
+publication as of this writing; its CSAF identifier will be added here once
+it goes live.
 
 We were unable to identify a security contact for the vendor. The product ships
 under multiple brand names from what appears to be a white-label manufacturing
