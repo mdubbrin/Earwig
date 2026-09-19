@@ -34,6 +34,8 @@ the tip, a Wi-Fi radio in the handle, and an Android app called EarVision
 feed on your phone. The same hardware is sold under several other names,
 including the Jegoat branding, which is typical of white-label IoT.
 
+![The JEGOAT-branded version of this device listed on Amazon](images/jegoat-amazon-listing.png)
+
 We bought the hardware, pulled the app apart, and put a wireless interface into
 monitor mode. What we found was not one flaw. It was the complete absence of a
 security model.
@@ -143,6 +145,8 @@ capture and reassembled. No pairing, no app, no interaction with the user.
                                    ▼
                             reconstructed video
 ```
+
+![Confirmed payload structure: an 8-byte custom transport header followed immediately by a JPEG SOI marker (FF D8), sitting in the clear with no encryption or obfuscation](CVE-2026-81330/jpeg-soi-marker.png)
 
 In our testing, frame reconstruction quality tracked the quality of the wireless
 capture. Packet loss in the capture shows up as lost frames, not as failure. The
@@ -289,6 +293,8 @@ contained the issue:
 The user-facing prompt is the only gate, and it is a poor one. It is the same
 prompt a legitimate update produces. The user cannot distinguish them, because
 the app cannot distinguish them.
+
+![The in-app "Firmware Update" prompt, captured on two different firmware versions — identical and unverifiable either way](CVE-2026-77974/OTA.jpg)
 
 ## The Full Chain
 
