@@ -36,8 +36,8 @@ including the Jegoat branding, which is typical of white-label IoT.
 
 ![The JEGOAT-branded version of this device listed on Amazon](images/jegoat-amazon-listing.png)
 
-We bought the hardware, pulled the app apart, and put a wireless interface into
-monitor mode. What we found was not one flaw. It was the complete absence of a
+I bought the hardware, pulled the app apart, and put a wireless interface into
+monitor mode. What I found was not one flaw. It was the complete absence of a
 security model.
 
 Four issues were assigned CVEs, coordinated through CISA:
@@ -148,7 +148,7 @@ capture and reassembled. No pairing, no app, no interaction with the user.
 
 ![Confirmed payload structure: an 8-byte custom transport header followed immediately by a JPEG SOI marker (FF D8), sitting in the clear with no encryption or obfuscation](CVE-2026-81330/jpeg-soi-marker.png)
 
-In our testing, frame reconstruction quality tracked the quality of the wireless
+In my testing, frame reconstruction quality tracked the quality of the wireless
 capture. Packet loss in the capture shows up as lost frames, not as failure. The
 attack degrades gracefully, which is the wrong property to have here.
 
@@ -258,7 +258,7 @@ those fields. They arrive over unencrypted UDP from an endpoint the app never
 verified.
 
 When the user accepts, the app sends the raw bundled firmware over UDP port
-61500 using opcode `10 04`. We observed no authentication on the transfer, no
+61500 using opcode `10 04`. I observed no authentication on the transfer, no
 transport encryption, and no cryptographic signature verification on the image
 at any point.
 
@@ -332,40 +332,40 @@ All testing was performed against researcher-owned hardware and a
 researcher-controlled environment. No third-party device, network, or user was
 involved at any point.
 
-**Static analysis.** We decompiled the EarVision APK and reviewed the
-`AndroidManifest.xml`, which is where `usesCleartextTraffic="true"` turned up. We
+**Static analysis.** I decompiled the EarVision APK and reviewed the
+`AndroidManifest.xml`, which is where `usesCleartextTraffic="true"` turned up. I
 extracted the bundled assets, which is how the three firmware images, the MNN
 library, and the `core.db` TFLite model were found. Version handling in the app
 led to the `device_version` and `ota_device_version` comparison.
 
-**Wireless capture.** We placed an interface in monitor mode and captured traffic
+**Wireless capture.** I placed an interface in monitor mode and captured traffic
 between the phone and the camera across normal app usage: pairing, live viewing,
 capture, and update checks.
 
-**Protocol analysis.** We separated the two UDP channels, identified the control
+**Protocol analysis.** I separated the two UDP channels, identified the control
 opcodes on 61500 and the frame transport on 61501, and mapped the JSON status
 schema.
 
-**Frame reconstruction.** We rebuilt JPEG and WEBP frames from captured UDP
+**Frame reconstruction.** I rebuilt JPEG and WEBP frames from captured UDP
 payloads and confirmed the video was recoverable from passive capture alone.
 
-**Spoofing proof of concept.** We operated a rogue access point presenting the
+**Spoofing proof of concept.** I operated a rogue access point presenting the
 expected device identity, confirmed the app accepted it, and confirmed that
 spoofed version fields produced the OTA prompt and the subsequent firmware
 transfer on port 61500.
 
 ## Disclosure
 
-We reported the issues to CISA, which coordinated CVE assignment. The four
+I reported the issues to CISA, which coordinated CVE assignment. The four
 CVEs were published on 2 September 2026. CISA's advisory was still pending
 publication as of this writing; its CSAF identifier will be added here once
 it goes live.
 
-We were unable to identify a security contact for the vendor. The product ships
+I was unable to identify a security contact for the vendor. The product ships
 under multiple brand names from what appears to be a white-label manufacturing
 arrangement, with no published vulnerability disclosure policy, no
 `security.txt`, and no security address on any of the storefronts or
-documentation we could locate. This is the normal condition for this class of
+documentation I could locate. This is the normal condition for this class of
 hardware and it is the reason coordination went through CISA rather than
 direct contact.
 
@@ -433,7 +433,7 @@ handling should reflect that, whether or not regulation currently requires it.
 Cheap white-label IoT is a large and growing share of the devices in people's
 homes, and it is built on reference designs that get copied across product lines
 with the security model intact, meaning absent. The chipsets here, Beken and TXW
-parts, appear in a wide range of consumer devices. The design patterns we found
+parts, appear in a wide range of consumer devices. The design patterns I found
 are not specific to ear cameras.
 
 What made this case worth publishing is the gap between the sensitivity of the
@@ -448,7 +448,7 @@ no regulation forces the question.
 
 ## Exploit-Code Policy
 
-We are not publishing the key derivation routine, the rogue AP implementation, or
+I am not publishing the key derivation routine, the rogue AP implementation, or
 tooling to reconstruct video from capture files.
 
 The issues are published, the CVEs are assigned, and the affected behavior is
@@ -459,4 +459,4 @@ working attack tooling against an unpatchable device in that position would harm
 users without meaningfully advancing anyone's understanding.
 
 Researchers who need technical detail for defensive or coordination purposes can
-reach us at the address on our contact page.
+contact me directly at mdubbrin@gmail.com.
