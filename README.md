@@ -12,17 +12,18 @@ updated with the CSAF advisory ID once it goes live.
 
 ## Findings
 
-| CVE | Finding | CWE | CVSS 3.1 |
+| CVE | Finding | CWE | CVSS 4.0 |
 |---|---|---|---|
-| [CVE-2026-81330](CVE-2026-81330/) | Cleartext live video over UDP | CWE-319 | 6.5 Medium |
-| [CVE-2026-81640](CVE-2026-81640/) | AP password derivable from broadcast BSSID | CWE-798 | 8.8 High |
-| [CVE-2026-82563](CVE-2026-82563/) | Device identity accepted from broadcast values, not cryptography | CWE-290 | 7.6 High |
-| [CVE-2026-77974](CVE-2026-77974/) | Unauthenticated, unsigned OTA firmware transfer | CWE-306 | 8.0 High |
+| [CVE-2026-81330](CVE-2026-81330/) | Cleartext live video over UDP | CWE-319 | 7.1 High |
+| [CVE-2026-81640](CVE-2026-81640/) | AP password derivable from broadcast BSSID | CWE-798 | 8.7 High |
+| [CVE-2026-82563](CVE-2026-82563/) | Device identity accepted from broadcast values, not cryptography | CWE-290 | 8.4 High |
+| [CVE-2026-77974](CVE-2026-77974/) | Unauthenticated, unsigned OTA firmware transfer | CWE-306 | 8.5 High |
 
 Scores and CWEs above are the official values from the published CVE
-records; none of the four reach the Critical band (9.0+) under standard
-CVSS v3.1 thresholds. CVE-2026-81640 carries the highest score of the four
-despite reading as the "quieter" finding in the write-up's narrative.
+records, rated under CVSS v4.0. All four fall in the High band
+(7.0–8.9); none reach Critical (9.0+). CVE-2026-81640 carries the
+highest score of the four despite reading as the "quieter" finding in
+the write-up's narrative.
 
 Individually, each is a common IoT defect. Chained (81640 → 81330 / 82563 →
 77974), they let anyone within radio range of the device passively recover

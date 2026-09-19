@@ -42,18 +42,18 @@ security model.
 
 Four issues were assigned CVEs, coordinated through CISA:
 
-| CVE            | Issue                                            | CWE      | CVSS 3.1     |
+| CVE            | Issue                                            | CWE      | CVSS 4.0     |
 | -------------- | ------------------------------------------------ | -------- | ------------ |
-| CVE-2026-81330 | Live video transmitted in cleartext over UDP     | CWE-319  | 6.5 Medium   |
-| CVE-2026-82563 | Device identified by broadcast values, not crypto | CWE-290  | 7.6 High     |
-| CVE-2026-81640 | AP password derivable from the broadcast BSSID   | CWE-798  | 8.8 High     |
-| CVE-2026-77974 | Unauthenticated, unsigned OTA firmware transfer   | CWE-306  | 8.0 High     |
+| CVE-2026-81330 | Live video transmitted in cleartext over UDP     | CWE-319  | 7.1 High     |
+| CVE-2026-82563 | Device identified by broadcast values, not crypto | CWE-290  | 8.4 High     |
+| CVE-2026-81640 | AP password derivable from the broadcast BSSID   | CWE-798  | 8.7 High     |
+| CVE-2026-77974 | Unauthenticated, unsigned OTA firmware transfer   | CWE-306  | 8.5 High     |
 
 CWEs and CVSS scores above are the official values from the published CVE
-records. None of the four reach the Critical band (9.0+) under standard CVSS
-v3.1 thresholds, and CVE-2026-81640 — the password-derivation issue — is the
-highest-scoring of the four, despite reading as the quieter, enabling step in
-the narrative below.
+records, rated under CVSS v4.0. All four fall in the High band; none reach
+the Critical band (9.0+). CVE-2026-81640 — the password-derivation issue —
+is the highest-scoring of the four, despite reading as the quieter,
+enabling step in the narrative below.
 
 Individually, each is a common IoT mistake. Chained, they let anyone within
 radio range watch the video feed, impersonate the camera to the app, and push
