@@ -2,13 +2,13 @@
 
 Four coordinated CVEs in the Softish C6 ear camera (also sold as "Jegoat"
 and under other white-label names) and its companion Android app, EarVision
-(`com.atomath.wifi_camera` v1.3.1). Coordinated through CISA. Advisory pending publication — this doc will be
-updated with the CSAF advisory ID once it goes live.
+(`com.atomath.wifi_camera` v1.3.1). Coordinated through CISA as
+**CSAF Advisory VA-26-251-01**.
 
 - **Full write-up:** [`earvision.md`](earvision.md)
 - **Formal paper (PDF):** [`Inside-the-Ear-Canal.pdf`](Inside-the-Ear-Canal.pdf)
 - **Web version:** https://mdubbrin.github.io/research/softish-c6-earvision/
-- **CISA advisory:** pending publication
+- **CISA advisory:** [VA-26-251-01](https://github.com/cisagov/CSAF/blob/develop/csaf_files/VA/white/2026/va-26-251-01.json)
 
 ## Findings
 
@@ -19,11 +19,13 @@ updated with the CSAF advisory ID once it goes live.
 | [CVE-2026-82563](CVE-2026-82563/) | Device identity accepted from broadcast values, not cryptography | CWE-290 | 8.4 High |
 | [CVE-2026-77974](CVE-2026-77974/) | Unauthenticated, unsigned OTA firmware transfer | CWE-306 | 8.5 High |
 
-Scores and CWEs above are the official values from the published CVE
-records, rated under CVSS v4.0. All four fall in the High band
-(7.0–8.9); none reach Critical (9.0+). CVE-2026-81640 carries the
-highest score of the four despite reading as the "quieter" finding in
-the write-up's narrative.
+CWEs and CVSS v3.1 scores above come from CISA CSAF Advisory
+VA-26-251-01; v4.0 scores come from NVD's record for each CVE (same
+scoring source, `ics-cert@hq.dhs.gov`), since the CSAF advisory itself
+publishes v4.0 vectors without a computed base score. All four fall in
+the High band (7.0–8.9); none reach Critical (9.0+). CVE-2026-81640
+carries the highest score of the four despite reading as the "quieter"
+finding in the write-up's narrative.
 
 Individually, each is a common IoT defect. Chained (81640 → 81330 / 82563 →
 77974), they let anyone within radio range of the device passively recover
@@ -55,8 +57,9 @@ was withheld from it.
 | Date | Event |
 |---|---|
 | May 2026 | Initial discovery |
-| 2026 | Reported to CISA; advisory pending publication |
+| 2026 | Reported to CISA for coordination |
 | 2 Sep 2026 | CVE-2026-81330, -81640, -82563, -77974 published |
+| 8 Sep 2026 | CISA publishes CSAF Advisory VA-26-251-01 |
 | 16 Sep 2026 | Research paper published |
 
 ## License

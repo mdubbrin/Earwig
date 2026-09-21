@@ -17,12 +17,7 @@ draft: false
 
 ## Security Advisories
 
-CISA: advisory pending publication
-
-> **Note:** CISA has not yet published its CSAF advisory for this
-> coordination as of this writing. Once it is live, its advisory ID will
-> be added here and everywhere else in this repository that currently
-> reads "advisory pending publication."
+CISA: [CSAF Advisory VA-26-251-01](https://github.com/cisagov/CSAF/blob/develop/csaf_files/VA/white/2026/va-26-251-01.json)
 
 CVE IDs: CVE-2026-81330, CVE-2026-82563, CVE-2026-81640, CVE-2026-77974
 
@@ -67,7 +62,7 @@ unsigned firmware to the hardware.
 - **Attacker position:** Wireless range of the device or the phone
 - **Required interaction:** None for video interception; one tap for the OTA chain
 - **Vendor contact:** No vendor security contact could be identified
-- **Coordination:** CISA (advisory pending publication)
+- **Coordination:** CISA, CSAF Advisory VA-26-251-01
 
 ## Why This Device Is Different
 
@@ -357,9 +352,8 @@ transfer on port 61500.
 ## Disclosure
 
 I reported the issues to CISA, which coordinated CVE assignment. The four
-CVEs were published on 2 September 2026. CISA's advisory was still pending
-publication as of this writing; its CSAF identifier will be added here once
-it goes live.
+CVEs were published on 2 September 2026, and CISA published CSAF Advisory
+VA-26-251-01 on 8 September 2026.
 
 I was unable to identify a security contact for the vendor. The product ships
 under multiple brand names from what appears to be a white-label manufacturing
